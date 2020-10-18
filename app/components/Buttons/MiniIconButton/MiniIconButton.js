@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 export default function MiniIconButton({
   width = 40,
   height = 40,
@@ -15,7 +15,7 @@ export default function MiniIconButton({
       <View
         style={[styles.container, { backgroundColor: color, height, width }]}
       >
-        <MaterialIcons name={icon} size={size} color={colorIcon} />
+        <MaterialCommunityIcons name={icon} size={size} color={colorIcon} />
       </View>
     </TouchableWithoutFeedback>
   );

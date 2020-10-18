@@ -4,8 +4,11 @@ import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
 
 import { AppForm, FormField, SubmitButton } from '../components/Forms';
 import { colors } from '../config/colors';
+import { useLink } from '../hooks/useLink';
 
 export default function LoginScreen() {
+  const [navigateToRoute] = useLink();
+
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().min(3).required().trim(),
@@ -19,7 +22,7 @@ export default function LoginScreen() {
       <View style={styles.form}>
         <AppForm
           initialValues={{ email: '', password: '' }}
-          onSubmit={(v) => console.log(v)}
+          onSubmit={() => navigateToRoute('tab')}
           validationSchema={schema}
         >
           <FormField

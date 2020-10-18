@@ -1,11 +1,20 @@
 import React from 'react';
 import { TouchableWithoutFeedback, StyleSheet, Text, View } from 'react-native';
+import IconComponent from '../../IconComponent/IconComponent';
 import { colors } from '../../../config/colors';
 
-export default function PickerItem({ title, icon, onPress }) {
+export default function PickerItem({ title, icon, size = 50, onPress }) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={styles.container}>
+      <View style={styles.wrapper}>
+        <View style={styles.container}>
+          <IconComponent
+            icon={icon}
+            size={size}
+            backgroundColor={colors.bluegreen}
+            color='#fff'
+          />
+        </View>
         <Text numberOfLines={1}>{title}</Text>
       </View>
     </TouchableWithoutFeedback>
@@ -13,14 +22,16 @@ export default function PickerItem({ title, icon, onPress }) {
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   container: {
-    backgroundColor: colors.lightGrey,
-    width: 80,
-    height: 80,
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 10,
+    marginBottom: 5,
+    marginTop: 20,
     marginHorizontal: 10,
   },
 });

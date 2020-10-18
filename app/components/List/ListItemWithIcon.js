@@ -1,5 +1,5 @@
 import React from 'react';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import {
@@ -22,6 +22,7 @@ export default function ListItemWithIcon({
   size = 50,
   onPress,
   RightAction,
+  trailing,
 }) {
   return (
     <Swipeable renderRightActions={RightAction}>
@@ -45,14 +46,19 @@ export default function ListItemWithIcon({
             />
           )}
           <View style={styles.description}>
-            <Text style={styles.title} numberOfLines={1}>
-              {title}
-            </Text>
-            {subtitle && (
-              <Text style={styles.subtitle} numberOfLines={2}>
-                {subtitle}
+            <View style={{ justifyContent: 'center' }}>
+              <Text style={styles.title} numberOfLines={1}>
+                {title}
               </Text>
-            )}
+              {subtitle && (
+                <Text style={styles.subtitle} numberOfLines={2}>
+                  {subtitle}
+                </Text>
+              )}
+            </View>
+            <View>
+              <MaterialCommunityIcons name='chevron-right' size={20} />
+            </View>
           </View>
         </View>
       </TouchableHighlight>
@@ -70,14 +76,15 @@ const styles = StyleSheet.create({
   },
 
   description: {
-    display: 'flex',
     paddingVertical: 10,
     paddingHorizontal: 10,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flex: 1,
   },
   title: {
     fontSize: 16,
-    marginBottom: 5,
   },
   subtitle: {
     color: colors.grey,

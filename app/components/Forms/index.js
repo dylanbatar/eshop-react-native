@@ -5,6 +5,8 @@ import ErrorMessage from './ErrorMessage/ErrorMessage';
 import FormField from './FormField/FormField';
 import PickerItem from './Picker/PickerItem';
 import SubmitButton from './SubmitButton/SubmitButton';
+import FormPicker from './FormPicker/FormPicker';
+import FormGalleryPicker from './FormGalleryPicker/FormGalleryPicker';
 
 export {
   AppForm,
@@ -14,4 +16,6 @@ export {
   FormField,
   PickerItem,
   SubmitButton,
+  FormPicker,
+  FormGalleryPicker,
 };

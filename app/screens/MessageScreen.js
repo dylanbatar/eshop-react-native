@@ -42,28 +42,26 @@ export default function MessageScreen() {
   };
 
   return (
-    <AppScreen>
-      <View style={styles.container}>
-        <FlatList
-          data={messages}
-          keyExtractor={(msg) => msg.id.toString()}
-          renderItem={({ item }) => (
-            <ListItemWithIcon
-              title={item.title}
-              subtitle={item.subtitle}
-              onPress={() => console.log(item.id)}
-              image={require('../assets/mosh.jpg')}
-              RightAction={() => (
-                <ListItemDeleteAct onPress={() => handlerDelete(item.id)} />
-              )}
-            />
-          )}
-          ItemSeparatorComponent={Separator}
-          refreshing={false}
-          onRefresh={() => pushMessage()}
-        />
-      </View>
-    </AppScreen>
+    <View style={styles.container}>
+      <FlatList
+        data={messages}
+        keyExtractor={(msg) => msg.id.toString()}
+        renderItem={({ item }) => (
+          <ListItemWithIcon
+            title={item.title}
+            subtitle={item.subtitle}
+            onPress={() => console.log(item.id)}
+            image={require('../assets/mosh.jpg')}
+            RightAction={() => (
+              <ListItemDeleteAct onPress={() => handlerDelete(item.id)} />
+            )}
+          />
+        )}
+        ItemSeparatorComponent={Separator}
+        refreshing={false}
+        onRefresh={() => pushMessage()}
+      />
+    </View>
   );
 }
 

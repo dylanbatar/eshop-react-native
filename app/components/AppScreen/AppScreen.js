@@ -19,7 +19,7 @@ export default function AppScreen({ children, defaultBg }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight,
+    paddingTop: Platform.OS === 'ios' ? 30 : StatusBar.currentHeight,
 
     flex: 1,
   },

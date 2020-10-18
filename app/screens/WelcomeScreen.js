@@ -2,10 +2,13 @@ import React from 'react';
 import { ImageBackground, StyleSheet, Image, Text, View } from 'react-native';
 import { LargeButton } from '../components/Buttons';
 import { colors } from '../config/colors';
+import { useLink } from '../hooks/useLink';
 
 export default function WelcomeScreen() {
+  const [navigateToRoute] = useLink();
   return (
     <ImageBackground
+      blurRadius={2}
       style={styles.backdrop}
       resizeMode='cover'
       source={require('../assets/background.jpg')}
@@ -15,8 +18,16 @@ export default function WelcomeScreen() {
         <Text>Sell What You Want</Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <LargeButton color={colors.bluegreen} title='Login' />
-        <LargeButton color={colors.red} title='Register' />
+        <LargeButton
+          onPress={() => navigateToRoute('loginScreen')}
+          color={colors.bluegreen}
+          title='Login'
+        />
+        <LargeButton
+          onPress={() => navigateToRoute('registerScreen')}
+          color={colors.red}
+          title='Register'
+        />
       </View>
     </ImageBackground>
   );

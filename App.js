@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { usePermissions, CAMERA_ROLL } from 'expo-permissions';
-import ListinEditScreen from './app/screens/ListinEditScreen';
-import { Button, Text, View } from 'react-native';
-import AppScreen from './app/components/AppScreen/AppScreen';
+import MainNavigator from './app/routers/MainNavigator';
 
 export default function App() {
   const [permission, askForPermission] = usePermissions(CAMERA_ROLL, {
@@ -19,5 +17,5 @@ export default function App() {
     requestPermission();
   });
 
-  return <ListinEditScreen />;
+  return <MainNavigator />;
 }

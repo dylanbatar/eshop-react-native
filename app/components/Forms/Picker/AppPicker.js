@@ -27,6 +27,7 @@ export default function AppPicker({
     setSelectItem(item);
     setModal(false);
     onSelectedItem(item);
+    console.log(item);
   };
 
   return (
@@ -73,11 +74,15 @@ export default function AppPicker({
           <FlatList
             data={items}
             numColumns={3}
+            columnWrapperStyle={{
+              justifyContent: 'space-between',
+            }}
             keyExtractor={(category) => category.id.toString()}
             renderItem={({ item }) => (
               <PickerItem
                 onPress={() => selectedItem(item)}
                 title={item.title}
+                icon={item.icon}
               />
             )}
           />
@@ -118,8 +123,8 @@ const styles = StyleSheet.create({
   },
   itemsContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
   flatList: {
     justifyContent: 'center',

@@ -1,15 +1,17 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import ListItemWithIcon from '../components/List/ListItemWithIcon';
 import { colors } from '../config/colors';
+import ListItemWithIcon from '../components/List/ListItemWithIcon';
 
-export default function ListingDetailScreen() {
+export default function ListingDetailScreen({ route }) {
+  const { image, title, subtitle } = route.params.item;
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require('../assets/jacket.jpg')} />
+      <Image style={styles.image} source={image} />
       <View style={styles.descripcion}>
-        <Text style={styles.title}>Red Jacket for sale!</Text>
-        <Text style={styles.subtitle}>$ 100</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.subtitle}>{subtitle}</Text>
       </View>
       <View style={styles.profile}>
         <ListItemWithIcon
@@ -34,6 +36,8 @@ const styles = StyleSheet.create({
   descripcion: {
     paddingHorizontal: 10,
     paddingVertical: 20,
+    backgroundColor: colors.white,
+    marginBottom: 20,
   },
   title: {
     fontSize: 20,
@@ -43,7 +47,5 @@ const styles = StyleSheet.create({
     color: colors.bluegreen,
     fontSize: 19,
   },
-  profile: {
-    marginHorizontal: 10,
-  },
+  profile: {},
 });

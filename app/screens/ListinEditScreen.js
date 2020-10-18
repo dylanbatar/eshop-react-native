@@ -3,10 +3,14 @@ import { Alert, StyleSheet, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as yup from 'yup';
 
-import { AppForm, FormField, SubmitButton } from '../components/Forms';
-import FormGalleryPicker from '../components/Forms/FormGalleryPicker/FormGalleryPicker';
 import AppScreen from '../components/AppScreen/AppScreen';
-import FormPicker from '../components/Forms/FormPicker/FormPicker';
+import {
+  AppForm,
+  FormField,
+  SubmitButton,
+  FormGalleryPicker,
+  FormPicker,
+} from '../components/Forms';
 import { colors } from '../config/colors';
 
 export default function ListinEditScreen() {
@@ -27,11 +31,15 @@ export default function ListinEditScreen() {
   });
 
   const CATEGORIES = [
-    { title: 'Tecnology', id: 1 },
-    { title: 'Cameras', id: 2 },
-    { title: 'Clothes', id: 3 },
-    { title: 'Accesories', id: 4 },
-    { title: 'Foot', id: 5 },
+    { title: 'Tecnology', icon: 'laptop-windows', id: 1 },
+    { title: 'Vehicles', icon: 'car', id: 2 },
+    { title: 'Home', icon: 'home', id: 3 },
+    { title: 'Sports', icon: 'dumbbell', id: 4 },
+    { title: 'Personal Care', icon: 'heart-pulse', id: 5 },
+    { title: "Baby's", icon: 'baby', id: 6 },
+    { title: 'Tools', icon: 'hammer', id: 7 },
+    { title: 'Instruments', icon: 'guitar-acoustic', id: 8 },
+    { title: 'Fashion', icon: 'tshirt-crew', id: 9 },
   ];
 
   const pickImage = async () => {
@@ -53,8 +61,6 @@ export default function ListinEditScreen() {
       },
     ]);
   };
-
-  const deleteImage = (image) => {};
 
   return (
     <AppScreen defaultBg>
@@ -104,7 +110,6 @@ export default function ListinEditScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
     marginHorizontal: 10,
   },
   containerButton: {

@@ -12,7 +12,12 @@ export default function IconComponent({
     <View
       style={[
         styles.iconContainer,
-        { backgroundColor, borderRadius: size / 2, padding: 10, width: size },
+        {
+          backgroundColor,
+          borderRadius: size / 2,
+          width: size,
+          height: size,
+        },
       ]}
     >
       <MaterialCommunityIcons name={icon} size={size * 0.5} color={color} />
