@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as yup from 'yup';
@@ -11,10 +11,27 @@ import {
   FormGalleryPicker,
   FormPicker,
 } from '../components/Forms';
+import listingAPI from '../api/listings';
+import categoriesAPI from '../api/categories';
 import { colors } from '../config/colors';
+import { useFetch } from '../hooks/useFetch';
+
+const CATEGORIES = [
+  { title: 'Tecnology', icon: 'laptop-windows', id: 1 },
+  { title: 'Vehicles', icon: 'car', id: 2 },
+  { title: 'Home', icon: 'home', id: 3 },
+  { title: 'Sports', icon: 'dumbbell', id: 4 },
+  { title: 'Personal Care', icon: 'heart-pulse', id: 5 },
+  { title: "Baby's", icon: 'baby', id: 6 },
+  { title: 'Tools', icon: 'hammer', id: 7 },
+  { title: 'Instruments', icon: 'guitar-acoustic', id: 8 },
+  { title: 'Fashion', icon: 'tshirt-crew', id: 9 },
+];
 
 export default function ListinEditScreen() {
   const [imagesCamera, setImagesCamera] = useState([]);
+  const addProduct = useFetch(listingAPI.addPost);
+  const loadCategories = useFetch(categoriesAPI.getCategories);
 
   const schema = yup.object().shape({
     gallery: yup.array().min(1).max(10).nullable().label('Gallery'),
@@ -29,18 +46,6 @@ export default function ListinEditScreen() {
     category: yup.object().nullable().required().label('Category'),
     description: yup.string().max(255),
   });
-
-  const CATEGORIES = [
-    { title: 'Tecnology', icon: 'laptop-windows', id: 1 },
-    { title: 'Vehicles', icon: 'car', id: 2 },
-    { title: 'Home', icon: 'home', id: 3 },
-    { title: 'Sports', icon: 'dumbbell', id: 4 },
-    { title: 'Personal Care', icon: 'heart-pulse', id: 5 },
-    { title: "Baby's", icon: 'baby', id: 6 },
-    { title: 'Tools', icon: 'hammer', id: 7 },
-    { title: 'Instruments', icon: 'guitar-acoustic', id: 8 },
-    { title: 'Fashion', icon: 'tshirt-crew', id: 9 },
-  ];
 
   const pickImage = async () => {
     const { uri, cancelled } = await ImagePicker.launchImageLibraryAsync();
@@ -62,6 +67,15 @@ export default function ListinEditScreen() {
     ]);
   };
 
+  const handlerSubmit = (item) => {
+    console.log(item);
+    addProduct.request(item);
+  };
+
+  useEffect(() => {
+    loadCategories.request();
+  }, []);
+
   return (
     <AppScreen defaultBg>
       <View style={styles.container}>
@@ -73,7 +87,7 @@ export default function ListinEditScreen() {
             description: '',
             gallery: null,
           }}
-          onSubmit={(v) => console.log(v)}
+          onSubmit={handlerSubmit}
           validationSchema={schema}
         >
           <View style={styles.listGallery}>
@@ -95,7 +109,7 @@ export default function ListinEditScreen() {
           <FormPicker
             placeholder='Category'
             trailingIcon='chevron-down'
-            items={CATEGORIES}
+            items={loadCategories.data}
             name='category'
           />
           <FormField multiline name='description' placeholder='Description' />

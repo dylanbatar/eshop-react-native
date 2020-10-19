@@ -6,7 +6,7 @@ export default function Card({ image, title, subtitle }) {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={image} />
+        <Image style={styles.image} source={{ uri: image }} />
       </View>
       <View style={styles.bodyContainer}>
         <Text style={styles.title}>{title}</Text>

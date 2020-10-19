@@ -21,7 +21,7 @@ export default function LoginScreen() {
       </View>
       <View style={styles.form}>
         <AppForm
-          initialValues={{ email: '', password: '' }}
+          initialValues={{ email: 'dylanbatar2@gmail.com', password: '12312' }}
           onSubmit={() => navigateToRoute('tab')}
           validationSchema={schema}
         >

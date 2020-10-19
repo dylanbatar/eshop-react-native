@@ -5,13 +5,14 @@ import { colors } from '../config/colors';
 import ListItemWithIcon from '../components/List/ListItemWithIcon';
 
 export default function ListingDetailScreen({ route }) {
-  const { image, title, subtitle } = route.params.item;
+  const { item } = route.params;
+  console.log(item);
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={image} />
+      <Image style={styles.image} source={{ uri: item.images[0].url }} />
       <View style={styles.descripcion}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subtitle}>{subtitle}</Text>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.subtitle}>{'$' + item.price}</Text>
       </View>
       <View style={styles.profile}>
         <ListItemWithIcon

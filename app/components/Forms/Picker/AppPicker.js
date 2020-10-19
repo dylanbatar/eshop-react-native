@@ -27,7 +27,6 @@ export default function AppPicker({
     setSelectItem(item);
     setModal(false);
     onSelectedItem(item);
-    console.log(item);
   };
 
   return (
@@ -81,8 +80,9 @@ export default function AppPicker({
             renderItem={({ item }) => (
               <PickerItem
                 onPress={() => selectedItem(item)}
-                title={item.title}
+                name={item.name}
                 icon={item.icon}
+                backgroundColor={item.backgroundColor}
               />
             )}
           />

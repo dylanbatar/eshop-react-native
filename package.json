@@ -12,6 +12,7 @@
     "@react-navigation/bottom-tabs": "^5.9.2",
     "@react-navigation/native": "^5.7.6",
     "@react-navigation/stack": "^5.9.3",
+    "apisauce": "^1.1.2",
     "expo": "~39.0.2",
     "expo-image-picker": "~9.1.0",
     "expo-permissions": "~9.3.0",
@@ -23,7 +24,8 @@
     "react-native-gesture-handler": "~1.7.0",
     "react-native-screens": "^2.11.0",
     "react-native-web": "~0.13.12",
-    "yup": "^0.29.3"
+    "yup": "^0.29.3",
+    "lottie-react-native": "~2.6.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

@@ -1,21 +1,26 @@
 import React from 'react';
 import { TouchableWithoutFeedback, StyleSheet, Text, View } from 'react-native';
 import IconComponent from '../../IconComponent/IconComponent';
-import { colors } from '../../../config/colors';
 
-export default function PickerItem({ title, icon, size = 50, onPress }) {
+export default function PickerItem({
+  name,
+  icon,
+  size = 80,
+  backgroundColor,
+  onPress,
+}) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={styles.wrapper}>
+      <View style={[styles.wrapper]}>
         <View style={styles.container}>
           <IconComponent
             icon={icon}
             size={size}
-            backgroundColor={colors.bluegreen}
+            backgroundColor={backgroundColor}
             color='#fff'
           />
         </View>
-        <Text numberOfLines={1}>{title}</Text>
+        <Text numberOfLines={1}>{name}</Text>
       </View>
     </TouchableWithoutFeedback>
   );
