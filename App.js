@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { usePermissions, CAMERA_ROLL } from "expo-permissions";
 import MainNavigator from "./app/routers/MainNavigator";
-import cacheStore from "./app/store/cacheStore";
 
 export default function App() {
   const [permission, askForPermission] = usePermissions(CAMERA_ROLL, {

@@ -5,9 +5,7 @@ const PREFIX = "cache";
 const get = async (key) => {
   try {
     const store = await AsyncStorage.getItem(PREFIX + key);
-    return store != null
-      ? JSON.parse(store)
-      : { ok: false, data: [], loading: false, error: true };
+    return JSON.parse(store);
   } catch (error) {
     console.log(error);
   }

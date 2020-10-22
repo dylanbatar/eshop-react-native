@@ -10,19 +10,17 @@ const get = apiLayer.get;
 
 apiLayer.get = async (url, params, axiosConfig) => {
   const network = await netInfo.fetch();
-  console.log(network);
   const response = await get(url, params, axiosConfig);
 
   if (response.ok) {
+    console.log("usando la buena");
     Cache.set(params.cachekey, { data: response.data, ok: true });
     return response;
   }
 
-  if (network.isConnected) {
-    const response = await Cache.get(params.cachekey);
-    console.log(response);
-    return { ok: true, data: response };
-  }
+  console.log("usando cache");
+  const data = await Cache.get(params.cachekey);
+  return { ok: true, data };
 };
 
 export default apiLayer;
