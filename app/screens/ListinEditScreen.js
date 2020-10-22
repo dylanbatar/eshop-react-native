@@ -16,18 +16,6 @@ import categoriesAPI from '../api/categories';
 import { colors } from '../config/colors';
 import { useFetch } from '../hooks/useFetch';
 
-const CATEGORIES = [
-  { title: 'Tecnology', icon: 'laptop-windows', id: 1 },
-  { title: 'Vehicles', icon: 'car', id: 2 },
-  { title: 'Home', icon: 'home', id: 3 },
-  { title: 'Sports', icon: 'dumbbell', id: 4 },
-  { title: 'Personal Care', icon: 'heart-pulse', id: 5 },
-  { title: "Baby's", icon: 'baby', id: 6 },
-  { title: 'Tools', icon: 'hammer', id: 7 },
-  { title: 'Instruments', icon: 'guitar-acoustic', id: 8 },
-  { title: 'Fashion', icon: 'tshirt-crew', id: 9 },
-];
-
 export default function ListinEditScreen() {
   const [imagesCamera, setImagesCamera] = useState([]);
   const addProduct = useFetch(listingAPI.addPost);
@@ -67,9 +55,10 @@ export default function ListinEditScreen() {
     ]);
   };
 
-  const handlerSubmit = (item) => {
-    console.log(item);
-    addProduct.request(item);
+  const handlerSubmit = async (item) => {
+    const response = await listingAPI.addPost({ ...item });
+    if (!response.ok) return alert('Something is wrong!');
+    alert('Success');
   };
 
   useEffect(() => {

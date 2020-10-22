@@ -27,6 +27,7 @@ export default function AppPicker({
     setSelectItem(item);
     setModal(false);
     onSelectedItem(item);
+    console.log(item);
   };
 
   return (
@@ -44,7 +45,7 @@ export default function AppPicker({
                 : { color: 'grey' },
             ]}
           >
-            {selectItem ? selectItem.title : placeholder}
+            {selectItem ? selectItem.name : placeholder}
           </Text>
           {trailingIcon && (
             <MaterialCommunityIcons
