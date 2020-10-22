@@ -16,13 +16,17 @@ export default function ListingProductsScreen() {
   const [navigatorByRoute] = useLink();
 
   useEffect(() => {
+    console.log(getListing);
+  }, [getListing.loading]);
+
+  useEffect(() => {
     getListing.request();
   }, []);
 
   return (
     <AppScreen>
       <View style={{ flex: 1 }}>
-        <LoadingIndicator visible={getListing.loading && !getListing.error} />
+        <LoadingIndicator visible={getListing.loading} />
         {getListing.error ? (
           <RetryConnectButton onPress={getListing.request} />
         ) : (

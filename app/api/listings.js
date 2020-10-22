@@ -3,7 +3,7 @@ import apiLayer from "./client";
 const endPoint = "/listings";
 
 // GET PRODUCTS POSTED
-const getListing = () => apiLayer.get(endPoint);
+const getListing = () => apiLayer.get(endPoint, { cachekey: "listings" });
 
 // ADD PRODUCT POST
 const addPost = (data, onUploadProgress) => {
