@@ -10,6 +10,7 @@ import RetryConnectButton from '../components/Buttons/RetryConnect/RetryConnect'
 import LoadingIndicator from '../components/Indicators/LoadingIndicator';
 import { useLink } from '../hooks/useLink';
 import { colors } from '../config/colors';
+import OfflineIndicator from '../components/Indicators/OfflineIndicator';
 
 export default function ListingProductsScreen() {
   const getListing = useFetch(listingAPI.getListing);
@@ -22,6 +23,7 @@ export default function ListingProductsScreen() {
   return (
     <AppScreen>
       <View style={{ flex: 1 }}>
+        <OfflineIndicator />
         <LoadingIndicator visible={getListing.loading} />
         {getListing.error ? (
           <RetryConnectButton onPress={getListing.request} />

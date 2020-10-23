@@ -8,7 +8,6 @@ export const useFetch = (apiFunc) => {
   const request = async (...params) => {
     const response = await apiFunc(...params);
 
-    console.log(response);
     if (!response || !response.ok) {
       setError(true);
       setLoading(false);
