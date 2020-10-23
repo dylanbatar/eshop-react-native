@@ -15,10 +15,11 @@ import listingAPI from '../api/listings';
 import categoriesAPI from '../api/categories';
 import { colors } from '../config/colors';
 import { useFetch } from '../hooks/useFetch';
+import UploadIndicator from '../components/Indicators/UploadIndicator';
 
 export default function ListinEditScreen() {
   const [imagesCamera, setImagesCamera] = useState([]);
-  const addProduct = useFetch(listingAPI.addPost);
+  const [upload, setUpload] = useState({ isUpload: false, progress: 0 });
   const loadCategories = useFetch(categoriesAPI.getCategories);
 
   const schema = yup.object().shape({
@@ -56,9 +57,17 @@ export default function ListinEditScreen() {
   };
 
   const handlerSubmit = async (item) => {
-    const response = await listingAPI.addPost({ ...item });
-    if (!response.ok) return alert('Something is wrong!');
-    alert('Success');
+    const response = await listingAPI.addPost(item, (progress) =>
+      setUpload({ progress, isUpload: true })
+    );
+
+    if (!response.ok) {
+      setUpload({ progress: 0, isUpload: false });
+      return alert('Algo malo ha pasado');
+    }
+
+    setUpload({ progress: 0, isUpload: false });
+    setImagesCamera([]);
   };
 
   useEffect(() => {
@@ -67,45 +76,48 @@ export default function ListinEditScreen() {
 
   return (
     <AppScreen defaultBg>
+      <UploadIndicator visible={upload.isUpload} percent={upload.progress} />
       <View style={styles.container}>
-        <AppForm
-          initialValues={{
-            title: '',
-            price: '',
-            category: null,
-            description: '',
-            gallery: null,
-          }}
-          onSubmit={handlerSubmit}
-          validationSchema={schema}
-        >
-          <View style={styles.listGallery}>
-            <FormGalleryPicker
-              items={imagesCamera}
-              iconButton='camera-plus'
-              onPressButton={pickImage}
-              onPressItem={modalDeleteImage}
-              name='gallery'
+        {upload.progress === 0 && (
+          <AppForm
+            initialValues={{
+              title: '',
+              price: '',
+              category: null,
+              description: '',
+              gallery: null,
+            }}
+            onSubmit={handlerSubmit}
+            validationSchema={schema}
+          >
+            <View style={styles.listGallery}>
+              <FormGalleryPicker
+                items={imagesCamera}
+                iconButton='camera-plus'
+                onPressButton={pickImage}
+                onPressItem={modalDeleteImage}
+                name='gallery'
+              />
+            </View>
+            <FormField name='title' placeholder='Title' />
+            <FormField
+              name='price'
+              placeholder='Price'
+              keyboardType='phone-pad'
+              width={'40%'}
             />
-          </View>
-          <FormField name='title' placeholder='Title' />
-          <FormField
-            name='price'
-            placeholder='Price'
-            keyboardType='phone-pad'
-            width={'40%'}
-          />
-          <FormPicker
-            placeholder='Category'
-            trailingIcon='chevron-down'
-            items={loadCategories.data}
-            name='category'
-          />
-          <FormField multiline name='description' placeholder='Description' />
-          <View style={styles.containerButton}>
-            <SubmitButton title='POST' color={colors.red} />
-          </View>
-        </AppForm>
+            <FormPicker
+              placeholder='Category'
+              trailingIcon='chevron-down'
+              items={loadCategories.data}
+              name='category'
+            />
+            <FormField multiline name='description' placeholder='Description' />
+            <View style={styles.containerButton}>
+              <SubmitButton title='POST' color={colors.red} />
+            </View>
+          </AppForm>
+        )}
       </View>
     </AppScreen>
   );

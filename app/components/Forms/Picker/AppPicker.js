@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   TouchableWithoutFeedback,
   StyleSheet,
@@ -7,11 +7,11 @@ import {
   Modal,
   Button,
   FlatList,
-} from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { colors } from '../../../config/colors';
-import PickerItem from './PickerItem';
-import LargeButton from '../../Buttons/LargeButton/LargeButton';
+} from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../config/colors";
+import PickerItem from "./PickerItem";
+import LargeButton from "../../Buttons/LargeButton/LargeButton";
 
 export default function AppPicker({
   icon,
@@ -42,7 +42,7 @@ export default function AppPicker({
               styles.placeholder,
               selectItem?.title
                 ? { color: colors.fullDark }
-                : { color: 'grey' },
+                : { color: "grey" },
             ]}
           >
             {selectItem ? selectItem.name : placeholder}
@@ -60,13 +60,13 @@ export default function AppPicker({
       <Modal
         visible={modal}
         style={styles.modal}
-        animationType='slide'
-        presentationStyle='formSheet'
+        animationType="slide"
+        presentationStyle="formSheet"
       >
         <View style={styles.buttonContainer}>
           <LargeButton
-            title='Close'
-            colorText={'blue'}
+            title="Close"
+            colorText={"blue"}
             onPress={() => setModal(false)}
           />
         </View>
@@ -75,7 +75,7 @@ export default function AppPicker({
             data={items}
             numColumns={3}
             columnWrapperStyle={{
-              justifyContent: 'space-between',
+              justifyContent: "space-between",
             }}
             keyExtractor={(category) => category.id.toString()}
             renderItem={({ item }) => (
@@ -95,8 +95,8 @@ export default function AppPicker({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: colors.lightGrey,
     borderRadius: 20,
     paddingVertical: 10,
@@ -114,21 +114,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   trailingIcon: {
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
   },
   buttonContainer: {
     marginTop: 10,
   },
   buttonClose: {
-    color: 'red',
+    color: "red",
   },
   itemsContainer: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     paddingHorizontal: 20,
   },
   flatList: {
-    justifyContent: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    flexDirection: "row",
   },
 });

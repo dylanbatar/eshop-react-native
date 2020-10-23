@@ -1,12 +1,13 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { Image } from 'react-native-expo-image-cache';
 import { colors } from '../../config/colors';
 
 export default function Card({ image, title, subtitle }) {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: image }} />
+        <Image tint='light' style={styles.image} uri={image} preview={20} />
       </View>
       <View style={styles.bodyContainer}>
         <Text style={styles.title}>{title}</Text>

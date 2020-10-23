@@ -6,7 +6,7 @@ const endPoint = '/listings';
 const getListing = () => apiLayer.get(endPoint);
 
 // ADD PRODUCT POST
-const addPost = (data) => {
+const addPost = (data, onUploadProgress) => {
   const form = new FormData();
   form.append('title', data.title);
   form.append('price', data.price);
@@ -24,7 +24,10 @@ const addPost = (data) => {
     form.append('location', JSON.stringify(data.location));
   }
 
-  return apiLayer.post(endPoint, form);
+  return apiLayer.post(endPoint, form, {
+    onUploadProgress: (progress) =>
+      onUploadProgress(progress.total / progress.loaded),
+  });
 };
 
 export default { getListing, addPost };
