@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { Image } from 'react-native-expo-image-cache';
 import { colors } from '../config/colors';
 import ListItemWithIcon from '../components/List/ListItemWithIcon';
 
@@ -9,7 +10,7 @@ export default function ListingDetailScreen({ route }) {
   console.log(item);
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: item.images[0].url }} />
+      <Image style={styles.image} uri={item.images[0].url} />
       <View style={styles.descripcion}>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.subtitle}>{'$' + item.price}</Text>

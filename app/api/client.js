@@ -1,9 +1,9 @@
-import { create } from "apisauce";
-import netInfo from "@react-native-community/netinfo";
-import Cache from "../store/cacheStore";
+import { create } from 'apisauce';
+import netInfo from '@react-native-community/netinfo';
+import Cache from '../store/cacheStore';
 
 const apiLayer = create({
-  baseURL: "http://192.168.1.8:9000/api",
+  baseURL: 'http://192.168.1.7:9000/api',
 });
 
 const get = apiLayer.get;
@@ -13,14 +13,14 @@ apiLayer.get = async (url, params, axiosConfig) => {
   const response = await get(url, params, axiosConfig);
 
   if (response.ok) {
-    console.log("usando la buena");
-    Cache.set(params.cachekey, { data: response.data, ok: true });
+    Cache.set(url, response.data);
     return response;
   }
 
-  console.log("usando cache");
-  const data = await Cache.get(params.cachekey);
-  return { ok: true, data };
+  if (network.type !== 'wifi' && network.isInternetReachable === false) {
+    const data = await Cache.get(url);
+    return data ? { ok: true, data } : response;
+  }
 };
 
 export default apiLayer;
