@@ -1,13 +1,18 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Image } from 'react-native-expo-image-cache';
-import { colors } from '../../config/colors';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Image } from "react-native-expo-image-cache";
+import { colors } from "../../config/colors";
 
 export default function Card({ image, title, subtitle }) {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image tint='light' style={styles.image} uri={image} preview={20} />
+        <Image
+          tint="light"
+          style={styles.image}
+          uri={image}
+          preview={{ uri: image }}
+        />
       </View>
       <View style={styles.bodyContainer}>
         <Text style={styles.title}>{title}</Text>
@@ -33,13 +38,13 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   imageContainer: {
-    width: '100%',
-    overflow: 'hidden',
+    width: "100%",
+    overflow: "hidden",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 200,
   },
   bodyContainer: {
