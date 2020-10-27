@@ -9,6 +9,7 @@ import { useAuth } from "../hooks/useAuth";
 export default function ListingDetailScreen({ route }) {
   const { item } = route.params;
   const { user } = useAuth();
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} uri={item.images[0].url} />

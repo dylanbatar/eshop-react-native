@@ -5,9 +5,10 @@ import { usePermissions, CAMERA_ROLL } from "expo-permissions";
 import AuthContext from "./app/contexts/AuthContext";
 import MainNavigator from "./app/routers/MainNavigator";
 import secureStore from "./app/store/secureStore";
+import { useAuth } from "./app/hooks/useAuth";
 
 export default function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [isReady, setIsReady] = useState(false);
 
   const [permission, askForPermission] = usePermissions(CAMERA_ROLL, {
@@ -22,8 +23,10 @@ export default function App() {
   };
 
   const currentUser = async () => {
-    const user = await secureStore.get("token");
-    setUser(user);
+    const _user = await secureStore.get("token");
+    if (!_user) return;
+
+    setUser(_user);
   };
 
   // handler permission modal
