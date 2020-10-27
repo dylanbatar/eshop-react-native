@@ -1,9 +1,11 @@
-import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-import ListItemWithIcon from '../components/List/ListItemWithIcon';
+import React, { useContext } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
+
 import { colors } from '../config/colors';
+import ListItemWithIcon from '../components/List/ListItemWithIcon';
 import Separator from '../components/List/Separator';
 import { useLink } from '../hooks/useLink';
+import { useAuth } from '../hooks/useAuth';
 
 const INITIAL_OPTIONS = [
   {
@@ -26,13 +28,14 @@ const INITIAL_OPTIONS = [
 
 export default function AccountScreen() {
   const [navigateToRoute] = useLink();
+  const { user, logout } = useAuth();
 
   return (
     <View style={styles.container}>
       <View style={styles.profileItem}>
         <ListItemWithIcon
-          title='Dylan Batista'
-          subtitle='dylanbatar2@gmail.com'
+          title={user.name}
+          subtitle={user.email}
           size={60}
           image={require('../assets/mosh.jpg')}
         />
@@ -57,7 +60,7 @@ export default function AccountScreen() {
         bgIcon='#ffe66d'
         icon='logout'
         size={40}
-        onPress={() => navigateToRoute('welcomeScreen')}
+        onPress={logout}
       />
     </View>
   );

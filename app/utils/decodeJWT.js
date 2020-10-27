@@ -1,9 +1,12 @@
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
 
 const decodeToken = (token) => {
-  const tokenData = jwt_decode(token);
-  console.log(tokenData);
-  return tokenData;
+  try {
+    const tokenData = jwt_decode(token);
+    return tokenData;
+  } catch (error) {
+    return null;
+  }
 };
 
 export default {

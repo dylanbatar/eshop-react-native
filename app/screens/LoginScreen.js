@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import * as yup from "yup";
 import { Image, SafeAreaView, StyleSheet, View } from "react-native";
 
@@ -12,11 +12,12 @@ import authAPI from "../api/auth";
 import { colors } from "../config/colors";
 import { useLink } from "../hooks/useLink";
 import { useFetch } from "../hooks/useFetch";
+import { useAuth } from "../hooks/useAuth";
 
 export default function LoginScreen() {
   const [authError, setAuthError] = useState(false);
 
-  const [navigateToRoute] = useLink();
+  const auth = useAuth();
   const login = useFetch(authAPI.login);
 
   const schema = yup.object().shape({
@@ -26,13 +27,12 @@ export default function LoginScreen() {
 
   const handlerSubmit = async (user) => {
     const response = await login.request(user);
-
     if (!response.ok) {
       setAuthError(true);
       return;
     }
     setAuthError(false);
-    navigateToRoute("tab");
+    auth.login(response.data);
   };
 
   return (
@@ -40,10 +40,9 @@ export default function LoginScreen() {
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={require("../assets/logo-red.png")} />
       </View>
-
       <View style={styles.form}>
         <AppForm
-          initialValues={{ email: "dylanbatar2@gmail.com", password: "12345" }}
+          initialValues={{ email: "dylanbatar@gmail.com", password: "12345" }}
           onSubmit={handlerSubmit}
           validationSchema={schema}
         >
