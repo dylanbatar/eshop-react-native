@@ -5,7 +5,8 @@ const PREFIX = 'secureStore';
 
 const set = async (key, value) => {
   try {
-    await SecureStore.setItemAsync(PREFIX + key, JSON.stringify(value));
+    const decodeData = jwtDecode.decodeToken(value);
+    await SecureStore.setItemAsync(PREFIX + key, JSON.stringify(decodeData));
   } catch (error) {
     console.log('Error on save data', error);
   }
@@ -14,14 +15,22 @@ const set = async (key, value) => {
 const get = async (key) => {
   try {
     const data = await SecureStore.getItemAsync(PREFIX + key);
-    const decodeData = jwtDecode.decodeToken(JSON.parse(data));
-    return decodeData;
+    return JSON.parse(data);
   } catch (error) {
     console.log('Error on get store', error);
+  }
+};
+
+const remove = async (key) => {
+  try {
+    await SecureStore.deleteItemAsync(PREFIX + key);
+  } catch (error) {
+    console.log('Error on delete data of the store');
   }
 };
 
 export default {
   set,
   get,
+  remove,
 };

@@ -4,10 +4,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
 import { colors } from '../config/colors';
 import ListItemWithIcon from '../components/List/ListItemWithIcon';
+import { useAuth } from '../hooks/useAuth';
 
 export default function ListingDetailScreen({ route }) {
   const { item } = route.params;
-  console.log(item);
+  const { user } = useAuth();
   return (
     <View style={styles.container}>
       <Image style={styles.image} uri={item.images[0].url} />
@@ -18,7 +19,7 @@ export default function ListingDetailScreen({ route }) {
       <View style={styles.profile}>
         <ListItemWithIcon
           image={require('../assets/mosh.jpg')}
-          title='Dylan Batista'
+          title={user.name}
           subtitle='5 Listings'
           size={60}
         />
@@ -49,5 +50,4 @@ const styles = StyleSheet.create({
     color: colors.bluegreen,
     fontSize: 19,
   },
-  profile: {},
 });
