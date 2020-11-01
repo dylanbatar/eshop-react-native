@@ -1,18 +1,17 @@
-import React, { useContext, useState } from "react";
-import * as yup from "yup";
-import { Image, SafeAreaView, StyleSheet, View } from "react-native";
+import React, { useContext, useState } from 'react';
+import * as yup from 'yup';
+import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
 
 import {
   AppForm,
   ErrorMessage,
   FormField,
   SubmitButton,
-} from "../components/Forms";
-import authAPI from "../api/auth";
-import { colors } from "../config/colors";
-import { useLink } from "../hooks/useLink";
-import { useFetch } from "../hooks/useFetch";
-import { useAuth } from "../hooks/useAuth";
+} from '../components/Forms';
+import authAPI from '../api/auth';
+import { colors } from '../config/colors';
+import { useFetch } from '../hooks/useFetch';
+import { useAuth } from '../hooks/useAuth';
 
 export default function LoginScreen() {
   const [authError, setAuthError] = useState(false);
@@ -27,6 +26,7 @@ export default function LoginScreen() {
 
   const handlerSubmit = async (user) => {
     const response = await login.request(user);
+    console.log(user);
     if (!response.ok) {
       setAuthError(true);
       return;
@@ -38,35 +38,35 @@ export default function LoginScreen() {
   return (
     <SafeAreaView>
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require("../assets/logo-red.png")} />
+        <Image style={styles.logo} source={require('../assets/logo-red.png')} />
       </View>
       <View style={styles.form}>
         <AppForm
-          initialValues={{ email: "dylanbatar@gmail.com", password: "12345" }}
+          initialValues={{ email: 'dylanbatar@gmail.com', password: '12345' }}
           onSubmit={handlerSubmit}
           validationSchema={schema}
         >
           <FormField
-            placeholder="Email"
-            keyboardType="email-address"
-            autoCompleteType="off"
-            textContentType="emailAddress"
-            icon="account"
-            name="email"
+            placeholder='Email'
+            keyboardType='email-address'
+            autoCompleteType='off'
+            textContentType='emailAddress'
+            icon='account'
+            name='email'
           />
           <FormField
-            placeholder="Password"
+            placeholder='Password'
             numberOfLines={1}
             secureTextEntry
-            icon="lock"
-            name="password"
+            icon='lock'
+            name='password'
           />
           <ErrorMessage
-            error="Email or password is no valid"
+            error='Email or password is no valid'
             visible={authError}
           />
           <View style={styles.buttonContainer}>
-            <SubmitButton title="Login" color={colors.red} />
+            <SubmitButton title='Login' color={colors.red} />
           </View>
         </AppForm>
       </View>
@@ -77,8 +77,8 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   logoContainer: {
     marginTop: 50,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   logo: {
     width: 90,
