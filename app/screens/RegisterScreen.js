@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import * as yup from "yup";
-import { StyleSheet, View } from "react-native";
+import React, { useState } from 'react';
+import * as yup from 'yup';
+import { StyleSheet, View } from 'react-native';
 
 import {
   AppForm,
   ErrorMessage,
   FormField,
   SubmitButton,
-} from "../components/Forms";
-import { colors } from "../config/colors";
-import { useFetch } from "../hooks/useFetch";
-import userAPI from "../api/users";
-import { useLink } from "../hooks/useLink";
+} from '../components/Forms';
+import { colors } from '../config/colors';
+import { useFetch } from '../hooks/useFetch';
+import userAPI from '../api/users';
+import { useLink } from '../hooks/useLink';
+import LoadingIndicator from '../components/Indicators/LoadingIndicator';
 
 export default function RegisterScreen() {
-  const [error, setError] = useState({ message: "", visible: false });
+  const [error, setError] = useState({ message: '', visible: false });
+  const [loading, setLoading] = useState(false);
   const register = useFetch(userAPI.register);
   const [navigateByRouter] = useLink();
 
@@ -24,7 +26,8 @@ export default function RegisterScreen() {
     password: yup.string().min(3).max(16).required(),
   });
 
-  const handlerSubmit = async (newUser) => {
+  const handlerSubmit = async (newUser, { resetForm }) => {
+    setLoading(true);
     const response = await register.request({
       name: newUser.username,
       email: newUser.email,
@@ -38,36 +41,40 @@ export default function RegisterScreen() {
       });
       return;
     }
-
-    navigateByRouter("loginScreen");
+    resetForm();
+    setLoading(false);
+    navigateByRouter('loginScreen');
   };
 
   return (
-    <View style={styles.container}>
-      <AppForm
-        initialValues={{ email: "", password: "", username: "" }}
-        onSubmit={handlerSubmit}
-        validationSchema={schema}
-      >
-        <FormField name="username" icon="account" placeholder="Username" au />
-        <FormField
-          name="email"
-          icon="email"
-          placeholder="Email"
-          keyboardType="email-address"
-        />
-        <FormField
-          name="password"
-          icon="lock"
-          placeholder="Password"
-          secureTextEntry
-        />
-        <ErrorMessage visible={error.visible} error={error.message} />
-        <View style={styles.containerButton}>
-          <SubmitButton title="Register" color={colors.red} />
-        </View>
-      </AppForm>
-    </View>
+    <>
+      <LoadingIndicator visible={loading} />
+      <View style={styles.container}>
+        <AppForm
+          initialValues={{ email: '', password: '', username: '' }}
+          onSubmit={handlerSubmit}
+          validationSchema={schema}
+        >
+          <FormField name='username' icon='account' placeholder='Username' au />
+          <FormField
+            name='email'
+            icon='email'
+            placeholder='Email'
+            keyboardType='email-address'
+          />
+          <FormField
+            name='password'
+            icon='lock'
+            placeholder='Password'
+            secureTextEntry
+          />
+          <ErrorMessage visible={error.visible} error={error.message} />
+          <View style={styles.containerButton}>
+            <SubmitButton title='Register' color={colors.red} />
+          </View>
+        </AppForm>
+      </View>
+    </>
   );
 }
 

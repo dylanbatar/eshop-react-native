@@ -12,9 +12,11 @@ import authAPI from '../api/auth';
 import { colors } from '../config/colors';
 import { useFetch } from '../hooks/useFetch';
 import { useAuth } from '../hooks/useAuth';
+import LoadingIndicator from '../components/Indicators/LoadingIndicator';
 
 export default function LoginScreen() {
   const [authError, setAuthError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const auth = useAuth();
   const login = useFetch(authAPI.login);
@@ -25,6 +27,7 @@ export default function LoginScreen() {
   });
 
   const handlerSubmit = async (user) => {
+    setLoading(true);
     const response = await login.request(user);
     console.log(user);
     if (!response.ok) {
@@ -33,10 +36,12 @@ export default function LoginScreen() {
     }
     setAuthError(false);
     auth.login(response.data);
+    setLoading(false);
   };
 
   return (
     <SafeAreaView>
+      <LoadingIndicator visible={loading} />
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={require('../assets/logo-red.png')} />
       </View>

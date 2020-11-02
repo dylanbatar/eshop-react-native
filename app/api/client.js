@@ -1,9 +1,14 @@
 import { create } from 'apisauce';
 import netInfo from '@react-native-community/netinfo';
 import Cache from '../store/cacheStore';
+import secureStore from '../store/secureStore';
 
 const apiLayer = create({
-  baseURL: 'http://192.168.1.1:9000/api',
+  baseURL: 'http://192.168.1.6:9000/api',
+});
+
+apiLayer.addAsyncRequestTransform(async (request) => {
+  request.headers['x-auth-token'] = await secureStore.getToken();
 });
 
 const get = apiLayer.get;
