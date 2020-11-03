@@ -1,28 +1,28 @@
-import React, { useContext } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import React, { useContext } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
 
-import { colors } from '../config/colors';
-import ListItemWithIcon from '../components/List/ListItemWithIcon';
-import Separator from '../components/List/Separator';
-import { useLink } from '../hooks/useLink';
-import { useAuth } from '../hooks/useAuth';
+import { colors } from "../config/colors";
+import ListItemWithIcon from "../components/List/ListItemWithIcon";
+import Separator from "../components/List/Separator";
+import { useLink } from "../hooks/useLink";
+import { useAuth } from "../hooks/useAuth";
 
 const INITIAL_OPTIONS = [
   {
-    title: 'My listing',
+    title: "My listing",
     icon: {
       bg: colors.red,
-      name: 'format-list-bulleted',
+      name: "format-list-bulleted",
     },
-    route: '',
+    route: "myListings",
   },
   {
-    title: 'My Messages',
+    title: "My Messages",
     icon: {
       bg: colors.bluegreen,
-      name: 'email',
+      name: "email",
     },
-    route: 'message',
+    route: "message",
   },
 ];
 
@@ -37,7 +37,7 @@ export default function AccountScreen() {
           title={user.name}
           subtitle={user.email}
           size={60}
-          image={require('../assets/mosh.jpg')}
+          image={require("../assets/mosh.jpg")}
         />
       </View>
       <FlatList
@@ -56,9 +56,9 @@ export default function AccountScreen() {
         ListFooterComponent={<Separator style={{ paddingTop: 20 }} />}
       />
       <ListItemWithIcon
-        title='Log Out'
-        bgIcon='#ffe66d'
-        icon='logout'
+        title="Log Out"
+        bgIcon="#ffe66d"
+        icon="logout"
         size={40}
         onPress={logout}
       />

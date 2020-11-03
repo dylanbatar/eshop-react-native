@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { colors } from '../../../config/colors';
+import React from "react";
+import { StyleSheet, TextInput, View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../config/colors";
 
-export default function AppTextInput({ icon, width = '100%', ...props }) {
+export default function AppTextInput({ icon, width = "100%", ...props }) {
   return (
     <View style={[styles.container, { width }]}>
       {icon && (
@@ -16,8 +16,8 @@ export default function AppTextInput({ icon, width = '100%', ...props }) {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: colors.lightGrey,
     borderRadius: 20,
     paddingVertical: 10,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingLeft: 10,
     color: colors.dark,
-    overflow: 'hidden',
-    width: '90%',
+    overflow: "hidden",
+    width: "90%",
   },
 });

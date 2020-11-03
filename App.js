@@ -32,7 +32,7 @@ export default function App() {
   // handler permission modal
   useEffect(() => {
     requestPermission();
-  });
+  }, []);
 
   if (!isReady) {
     return (

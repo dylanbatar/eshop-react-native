@@ -1,17 +1,25 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { Image } from "react-native-expo-image-cache";
 import { colors } from "../config/colors";
 import ListItemWithIcon from "../components/List/ListItemWithIcon";
 import { useAuth } from "../hooks/useAuth";
+import ContactSellerForm from "../components/ContactSellerForm/ContactSellerForm";
 
 export default function ListingDetailScreen({ route }) {
   const { item } = route.params;
   const { user } = useAuth();
 
   return (
-    <View style={styles.container}>
+    // <View style={styles.container}>
+    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={80}>
       <Image style={styles.image} uri={item.images[0].url} />
       <View style={styles.descripcion}>
         <Text style={styles.title}>{item.title}</Text>
@@ -24,8 +32,10 @@ export default function ListingDetailScreen({ route }) {
           subtitle="5 Listings"
           size={60}
         />
+        <ContactSellerForm listing={item} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
+    // </View>
   );
 }
 

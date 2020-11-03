@@ -1,14 +1,14 @@
-import { create } from 'apisauce';
-import netInfo from '@react-native-community/netinfo';
-import Cache from '../store/cacheStore';
-import secureStore from '../store/secureStore';
+import { create } from "apisauce";
+import netInfo from "@react-native-community/netinfo";
+import Cache from "../store/cacheStore";
+import secureStore from "../store/secureStore";
 
 const apiLayer = create({
-  baseURL: 'http://192.168.1.6:9000/api',
+  baseURL: "http://192.168.1.7:9000/api",
 });
 
 apiLayer.addAsyncRequestTransform(async (request) => {
-  request.headers['x-auth-token'] = await secureStore.getToken();
+  request.headers["x-auth-token"] = await secureStore.getToken();
 });
 
 const get = apiLayer.get;
@@ -22,7 +22,7 @@ apiLayer.get = async (url, params, axiosConfig) => {
     return response;
   }
 
-  if (network.type !== 'wifi' && network.isInternetReachable === false) {
+  if (network.type !== "wifi" && network.isInternetReachable === false) {
     const data = await Cache.get(url);
     return data ? { ok: true, data } : response;
   }
