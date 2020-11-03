@@ -3,6 +3,7 @@ import { Keyboard, StyleSheet, View } from "react-native";
 import { colors } from "../../config/colors";
 import { AppForm, FormField, SubmitButton } from "../Forms";
 import messageAPI from "../../api/messages";
+import * as Notifications from "expo-notifications";
 
 export default function ContactSellerForm({ listing }) {
   const handlerSubmit = async ({ message }, { resetForm }) => {
@@ -16,7 +17,20 @@ export default function ContactSellerForm({ listing }) {
       return;
     }
 
-    alert("message send!");
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowAlert: true,
+      }),
+    });
+
+    Notifications.scheduleNotificationAsync({
+      content: {
+        vibrate: [100],
+        title: "Message send",
+        subtitle: message,
+      },
+      trigger: null,
+    });
 
     resetForm();
   };
