@@ -41,7 +41,7 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView>
-      <LoadingIndicator visible={loading} />
+      <LoadingIndicator visible={loading && !authError} />
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={require("../assets/logo-red.png")} />
       </View>
