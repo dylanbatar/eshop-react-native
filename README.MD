@@ -26,15 +26,15 @@ you need npm and expo-cli
 - Account Screen
 
 ## Some Views...
-<img src ="screenViews/screen_ (1).jpeg" alt="splash screen" width="260" height="540" align="left">
-<img src ="screenViews/screen_ (2).jpeg" alt="splash screen" width="260" height="540" align="left">
-<img src ="screenViews/screen_ (3).jpeg" alt="splash screen" width="260" height="540" align="left">
+<img src ="screenViews/screen_ (1).jpeg" alt="splash screen" width="240" height="540" align="left">
+<img src ="screenViews/screen_ (2).jpeg" alt="splash screen" width="240" height="540" align="left">
+<img src ="screenViews/screen_ (3).jpeg" alt="splash screen" width="240" height="540" align="left">
 <br>
-<img src ="screenViews/screen_ (6).jpeg" alt="splash screen" width="260" height="540" align="left">
+<img src ="screenViews/screen_ (6).jpeg" alt="splash screen" width="240" height="540" align="left">
 <br>
-<img src ="screenViews/screen_ (8).jpeg" alt="splash screen" width="260" height="540" align="left">
+<img src ="screenViews/screen_ (8).jpeg" alt="splash screen" width="240" height="540" align="left">
 <br>
-<img src ="screenViews/screen_ (7).jpeg" alt="splash screen" width="260" height="540" align="left">
+<img src ="screenViews/screen_ (7).jpeg" alt="splash screen" width="240" height="540" align="left">
 
 
 
