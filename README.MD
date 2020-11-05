@@ -4,7 +4,7 @@ this app is create with react native using expo-cli and javascript
 
 ## How to work
 
-NOTE: **this app is connect with a backend for supply information **
+NOTE: **this app is connect with a backend for supply information**
 
 ## Prepare project
 
@@ -26,3 +26,15 @@ you need npm and expo-cli
 - Account Screen
 
 ## Some Views...
+<img src ="screenViews/screen_ (1).jpeg" alt="splash screen" width="280" height="550" align="left">
+<img src ="screenViews/screen_ (2).jpeg" alt="splash screen" width="280" height="550" align="left">
+<img src ="screenViews/screen_ (3).jpeg" alt="splash screen" width="280" height="550" align="left">
+<br>
+<img src ="screenViews/screen_ (6).jpeg" alt="splash screen" width="280" height="550" align="left">
+<br>
+<img src ="screenViews/screen_ (8).jpeg" alt="splash screen" width="280" height="550" align="left">
+<br>
+<img src ="screenViews/screen_ (7).jpeg" alt="splash screen" width="280" height="550" align="left">
+
+
+
